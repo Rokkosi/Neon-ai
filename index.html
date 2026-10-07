@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07080d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Neon AI">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" href="data:image/png;base64,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">
+<title>Neon AI</title>
+<style>
+  :root{--bg:#07080d;--panel:#0e1019;--line:#1f2333;--text:#e9ecf5;--mut:#7f879f;--c1:#00f0ff;--c2:#ff2bd6;--user:#18203a}
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0)}
+  body{background:var(--bg);color:var(--text);font:16px/1.5 system-ui,sans-serif;display:flex;flex-direction:column}
+  header{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--panel)}
+  .logo{flex:1;font-weight:800;font-size:20px;letter-spacing:2px;color:var(--c1);text-shadow:0 0 8px var(--c1),0 0 18px #00f0ff66}
+  .logo small{display:block;font-size:11px;font-weight:400;letter-spacing:0;color:var(--mut);text-shadow:none}
+  .logo span{color:var(--c2);text-shadow:0 0 8px var(--c2),0 0 18px #ff2bd666}
+  .icon{background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:14px}
+  .icon.on{border-color:var(--c2);color:var(--c2);box-shadow:0 0 10px #ff2bd655}
+  #chat{flex:1;overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:12px}
+  .hello{margin:auto;text-align:center;color:var(--mut);max-width:300px}
+  .hello b{display:block;font-size:26px;letter-spacing:3px;color:var(--c1);text-shadow:0 0 12px var(--c1);margin-bottom:6px}
+  .msg{max-width:92%;padding:10px 12px;border-radius:14px;white-space:pre-wrap;word-wrap:break-word}
+  .me{align-self:flex-end;background:var(--user);border:1px solid #2a3560}
+  .ai{align-self:flex-start;background:var(--panel);border:1px solid var(--line);box-shadow:0 0 14px #00f0ff0f}
+  .who{font-size:11px;color:var(--c1);margin-bottom:3px;opacity:.85}
+  .src{font-size:12px;color:var(--mut);margin-top:6px;white-space:normal}
+  .src a{color:var(--c1)}
+  pre{background:#04050a;border:1px solid var(--line);border-radius:10px;padding:10px;overflow-x:auto;margin:8px 0;position:relative;white-space:pre}
+  code{font-family:ui-monospace,Menlo,monospace;font-size:13px}
+  pre{padding-top:34px}
+  .bar{position:absolute;top:6px;right:6px;display:flex;gap:4px}
+  .copy{font-size:11px;background:var(--line);color:var(--text);border:0;border-radius:6px;padding:3px 8px;cursor:pointer}
+  .copy.run{background:linear-gradient(135deg,var(--c1),var(--c2));color:#06070c;font-weight:700}
+  .tabs{display:flex;gap:6px;padding:8px 12px;background:var(--panel);border-bottom:1px solid var(--line)}
+  .tab{flex:1;border:1px solid var(--line);background:var(--bg);color:var(--mut);padding:8px;border-radius:10px;font-size:14px;cursor:pointer}
+  .tab.on{color:var(--c1);border-color:var(--c1);box-shadow:0 0 10px #00f0ff44;font-weight:700}
+  .pic{max-width:100%;border-radius:10px;display:block;margin-top:6px;border:1px solid var(--line)}
+  .picbar{margin-top:6px;display:flex;gap:6px}
+  #chipbar{display:none;align-items:center;gap:8px;padding:6px 12px;background:var(--panel);border-top:1px solid var(--line);font-size:13px;color:var(--mut)}
+  #chipbar img{width:34px;height:34px;object-fit:cover;border-radius:6px;border:1px solid var(--c1)}
+  #chipbar button{margin-left:auto}
+  #attach{display:none}
+  #preview{width:96vw;max-width:none;height:90vh;padding:8px}
+  #preview[open]{display:flex;flex-direction:column;gap:8px}
+  #preview .top{display:flex;justify-content:space-between;align-items:center}
+  #pframe{flex:1;width:100%;border:0;background:#fff;border-radius:8px}
+  form{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line);background:var(--panel)}
+  textarea{flex:1;resize:none;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:10px;font:inherit;max-height:140px}
+  textarea:focus{outline:none;border-color:var(--c1);box-shadow:0 0 10px #00f0ff44}
+  button.send{background:linear-gradient(135deg,var(--c1),var(--c2));color:#06070c;border:0;border-radius:12px;padding:0 18px;font-weight:800;cursor:pointer}
+  dialog{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:14px;width:min(94vw,500px);max-height:90vh;overflow-y:auto;padding:16px}
+  dialog::backdrop{background:#000b}
+  label{display:block;font-size:13px;color:var(--mut);margin:10px 0 3px}
+  input[type=password],input[type=text],#custom{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit}
+  #custom{min-height:90px;resize:vertical}
+  .card{border:1px solid var(--line);border-radius:12px;padding:10px;margin-top:10px;background:var(--bg)}
+  .card .spec{font-size:12px;color:var(--mut);margin:2px 0 6px}
+  .card a{color:var(--c1);font-size:12px}
+  h4{margin:16px 0 0;font-size:14px;color:var(--c1)}
+  .chk{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px;color:var(--text)}
+  .row{display:flex;gap:8px;margin-top:14px}
+  .row button{flex:1;padding:9px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--text);cursor:pointer}
+  .row .pri{background:linear-gradient(135deg,var(--c1),var(--c2));color:#06070c;border:0;font-weight:800}
+  small{color:var(--mut)}
+  #lock{position:fixed;inset:0;z-index:99999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;text-align:center}
+  #lock .big{font-weight:800;font-size:34px;letter-spacing:3px;color:var(--c1);text-shadow:0 0 12px var(--c1)}
+  #lock .big span{color:var(--c2);text-shadow:0 0 12px var(--c2)}
+  #lock form{display:flex;flex-direction:column;gap:10px;width:min(86vw,320px);padding:0;border:0;background:none}
+  #lock input{width:100%;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;text-align:center}
+  #lock input:focus{outline:none;border-color:var(--c1);box-shadow:0 0 10px #00f0ff44}
+  #lock button{background:linear-gradient(135deg,var(--c1),var(--c2));color:#06070c;border:0;border-radius:12px;padding:12px;font-weight:800;font-size:16px;cursor:pointer}
+  #lock button:disabled{opacity:.5}
+  #lockmsg{min-height:20px;font-size:13px;color:var(--c2)}
+</style>
+</head>
+<body>
+<div id="lock">
+  <div class="big">NEON<span> AI</span></div>
+  <small>Enter your code to open</small>
+  <form id="lockform" autocomplete="off">
+    <input id="lockin" type="password" placeholder="Code" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
+    <button id="lockgo">Unlock</button>
+  </form>
+  <div id="lockmsg"></div>
+</div>
+<header>
+  <div class="logo">NEON<span> AI</span><small>The best AIs, combined into one</small></div>
+  <button class="icon" id="fusion" title="Fusion: all your AIs answer together, then get merged into one answer">🧬 Fusion</button>
+  <button class="icon" id="lockbtn" title="Lock the app">🔒</button>
+  <button class="icon" id="clear" title="New chat">🗑</button>
+  <button class="icon" id="gear" title="Settings">⚙️</button>
+</header>
+<div class="tabs" id="tabs">
+  <button class="tab on" data-mode="chat">💬 Chat</button>
+  <button class="tab" data-mode="codex">💻 Codex</button>
+  <button class="tab" data-mode="image">🎨 Image</button>
+</div>
+<div id="chat"></div>
+<div id="chipbar"><img id="chipimg" alt=""><span id="chiptext"></span><button class="icon" id="chipx" type="button">✕</button></div>
+<input type="file" id="file" accept="image/*" style="display:none">
+<form id="form">
+  <button class="icon" id="attach" type="button" title="Add a photo">📎</button>
+  <textarea id="input" rows="1" placeholder="Ask Neon AI anything..."></textarea>
+  <button class="send">Send</button>
+</form>
+
+<dialog id="preview">
+  <div class="top"><b style="color:var(--c1)">▶ App preview</b><button class="icon" id="pclose" type="button">✕ Close</button></div>
+  <iframe id="pframe" sandbox="allow-scripts allow-forms allow-modals"></iframe>
+</dialog>
+
+<dialog id="settings">
+  <h3 style="margin:0 0 4px;color:var(--c1)">Neon AI Settings</h3>
+  <small>Neon AI combines these AIs into one. Add a key for each one you want it to use (at least one). Keys stay in this browser and go only to each AI's own company.</small>
+
+  <h4>Custom instructions</h4>
+  <small>Tell Neon AI how to act, e.g. "Be casual and funny" or "Keep answers short."</small>
+  <textarea id="custom" placeholder="Your instructions..."></textarea>
+
+  <h4>Speed</h4>
+  <small>Fast uses the quickest model of each AI. Smart uses the strongest ones (slower).</small>
+  <select id="speed" style="width:100%;margin-top:6px;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit"><option value="fast">⚡ Fast (recommended)</option><option value="smart">🧠 Smart</option></select>
+
+  <h4>The AIs inside Neon AI</h4>
+  <div id="cards"></div>
+
+  <h4>🎨 Image tab (uses your Gemini key)</h4>
+  <label>Image model name</label><input id="m_image" type="text">
+  <small>Default is Google's Nano Banana 2. If it errors, try gemini-2.5-flash-image.</small>
+
+
+  <div class="row"><button id="cancel" type="button">Close</button><button class="pri" id="save" type="button">Save</button></div>
+</dialog>
+
+<script>
+const $ = s => document.querySelector(s);
+
+// ---------- Lock screen (code is stored only as a scrambled hash) ----------
+const LOCK_SALT = 'neonai:v1:', LOCK_ROUNDS = 20000, LOCK_HASH = 'f5b36bcc2e9a8cee5557e86a55f57a8cdc1d1136c3fa5087631963b4988ebf72';
+const K256 = new Uint32Array([0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2]);
+function sha256(str){
+  const data = new TextEncoder().encode(str), l = data.length;
+  const buf = new Uint8Array(((l+9+63)>>6)*64); buf.set(data); buf[l] = 0x80;
+  const dv = new DataView(buf.buffer);
+  dv.setUint32(buf.length-8, Math.floor(l*8/4294967296)); dv.setUint32(buf.length-4, (l*8)>>>0);
+  let h = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  const w = new Uint32Array(64);
+  for(let o=0;o<buf.length;o+=64){
+    for(let i=0;i<16;i++) w[i] = dv.getUint32(o+i*4);
+    for(let i=16;i<64;i++){
+      const a=w[i-15], b=w[i-2];
+      const s0=((a>>>7)|(a<<25))^((a>>>18)|(a<<14))^(a>>>3);
+      const s1=((b>>>17)|(b<<15))^((b>>>19)|(b<<13))^(b>>>10);
+      w[i]=(w[i-16]+s0+w[i-7]+s1)>>>0;
+    }
+    let [a,b,c,d,e,f,g,hh] = h;
+    for(let i=0;i<64;i++){
+      const S1=((e>>>6)|(e<<26))^((e>>>11)|(e<<21))^((e>>>25)|(e<<7));
+      const ch=(e&f)^(~e&g);
+      const t1=(hh+S1+ch+K256[i]+w[i])>>>0;
+      const S0=((a>>>2)|(a<<30))^((a>>>13)|(a<<19))^((a>>>22)|(a<<10));
+      const maj=(a&b)^(a&c)^(b&c);
+      const t2=(S0+maj)>>>0;
+      hh=g; g=f; f=e; e=(d+t1)>>>0; d=c; c=b; b=a; a=(t1+t2)>>>0;
+    }
+    h = [h[0]+a,h[1]+b,h[2]+c,h[3]+d,h[4]+e,h[5]+f,h[6]+g,h[7]+hh].map(x=>x>>>0);
+  }
+  return h.map(x=>x.toString(16).padStart(8,'0')).join('');
+}
+function stretch(code){ let h = sha256(LOCK_SALT+code); for(let i=0;i<LOCK_ROUNDS;i++) h = sha256(h); return h; }
+function isUnlocked(){ try{ return localStorage.getItem('neonai_ok')===LOCK_HASH; }catch(e){ return false; } }
+function showLock(){ $('#lock').style.display='flex'; $('#lockmsg').textContent=''; setTimeout(()=>$('#lockin').focus(),50); }
+let lockTries = 0;
+$('#lockform').onsubmit = async e=>{
+  e.preventDefault();
+  const code = $('#lockin').value; if(!code) return;
+  $('#lockgo').disabled = true; $('#lockmsg').textContent = 'Checking...';
+  await new Promise(r=>setTimeout(r,30));
+  if(stretch(code)===LOCK_HASH){
+    try{ localStorage.setItem('neonai_ok', LOCK_HASH); }catch(err){}
+    $('#lockin').value=''; $('#lock').style.display='none'; lockTries=0; startup();
+  }else{
+    lockTries++; $('#lockmsg').textContent = 'Wrong code, try again.';
+    await new Promise(r=>setTimeout(r,Math.min(lockTries*1000,8000)));
+  }
+  $('#lockgo').disabled = false;
+};
+$('#lockbtn').onclick = ()=>{ try{ localStorage.removeItem('neonai_ok'); }catch(e){} showLock(); };
+
+// ---------- The AIs inside Neon AI ----------
+const PROVIDERS = {
+  claude:     {name:'Claude',     emoji:'🟠', model:'claude-sonnet-5-5', fast:'claude-haiku-4-5-20251001', best:'Best at: coding, building full apps, careful reasoning, long writing.', link:'https://console.anthropic.com', ask:askClaude},
+  gemini:     {name:'Gemini',     emoji:'🔵', model:'gemini-2.5-pro', fast:'gemini-2.5-flash',  best:'Best at: natural chat, fast answers, huge context, understanding images.', link:'https://aistudio.google.com/apikey', ask:askGemini},
+  openai:     {name:'ChatGPT',    emoji:'🟢', model:'gpt-5', fast:'gpt-5-mini',  best:'Best at: all-rounder, brainstorming, step-by-step problem solving, math.', link:'https://platform.openai.com/api-keys', ask:askOpenAI},
+  perplexity: {name:'Perplexity', emoji:'🟣', model:'sonar-pro', fast:'sonar',  best:'Best at: live web search with sources: news, prices, what is happening now.', link:'https://www.perplexity.ai/settings/api', ask:askPerplexity}
+};
+// Which AI Neon AI tries first for each kind of question (it falls back to the next one if a key is missing or a call fails)
+const PRIORITY = {
+  code:   ['claude','openai','gemini','perplexity'],
+  search: ['perplexity','gemini','openai','claude'],
+  chat:   ['gemini','openai','claude','perplexity']
+};
+const CAT_SYS = {
+  code:   "For coding requests, give complete working code in fenced code blocks with the language tag, plus brief instructions to run it. Prefer simple single-file solutions unless told otherwise.",
+  search: "For questions about current events or facts, use up-to-date information and be concise and factual.",
+  chat:   "Keep answers clear, natural and friendly."
+};
+PRIORITY.codex = ['claude','openai','gemini','perplexity'];
+CAT_SYS.codex = "You are in Codex mode, a coding workspace. Help the user design, write, debug and improve code and apps. When building an app, output one complete working single-file HTML app (HTML, CSS and JavaScript inline) in a single ```html block so it can be run directly in the preview. For other languages, give complete files in fenced code blocks with the language tag, with the filename written just before each block. Briefly explain how to run it. Only ask a question if truly needed; otherwise make reasonable choices and build it. When fixing bugs, show the corrected code.";
+const BASE_SYS = "You are Neon AI, one assistant that combines the strengths of several AI models. You are Neon AI, the best AIs combined into one. If someone asks what you are built on, say Neon AI combines several of the best AI models.";
+
+// ---------- Settings ----------
+const DEF = {custom:'', fusion:false, showtag:true, speed:'fast', m_image:'gemini-3.1-flash-image-preview'};
+for(const p in PROVIDERS){ DEF['k_'+p]=''; DEF['m_'+p]=''; }
+function load(){
+  let c; try{ c = {...DEF, ...JSON.parse(localStorage.getItem('neonai')||'{}')}; }catch(e){ c = {...DEF}; }
+  for(const p in PROVIDERS){ if(c['m_'+p]===PROVIDERS[p].model || c['m_'+p]==='gpt-5' || c['m_'+p]==='sonar' || c['m_'+p]==='gemini-2.5-flash') c['m_'+p]=''; }
+  return c;
+}
+const mdl = p => cfg['m_'+p] || (cfg.speed==='smart' ? PROVIDERS[p].model : PROVIDERS[p].fast);
+function store(){ try{ localStorage.setItem('neonai', JSON.stringify(cfg)); }catch(e){} }
+let cfg = load();
+const hists = {chat:[], codex:[], image:[]};   // each tab keeps its own memory
+let pendingImg = null;   // photo the user just attached
+let baseImg = null;      // last image, used for follow-up edits
+let mode = 'chat';
+let history = hists.chat;
+
+const have = () => Object.keys(PROVIDERS).filter(p=>cfg['k_'+p]);
+function sysFor(cat){ return BASE_SYS+" "+CAT_SYS[cat]+(cfg.custom?"\n\nUser's custom instructions:\n"+cfg.custom:''); }
+function detect(text){
+  if(/(```|\bcode\b|\bbug\b|\bfunction\b|\bapp\b|\bhtml\b|\bcss\b|\bjavascript\b|\bpython\b|\bscript\b|\bapi\b|\berror\b|\bcompile|\bmod\b|\bjava\b|c\+\+|\bbuild me\b|\bmake me an?\b)/i.test(text)) return 'code';
+  if(/(\blatest\b|\bnews\b|\btoday\b|\bright now\b|\bcurrent(ly)?\b|\bprice of\b|\bweather\b|\bscore\b|\bsearch\b|\bwho won\b|\bthis week\b)/i.test(text)) return 'search';
+  return 'chat';
+}
+
+// ---------- API calls ----------
+async function sse(r, onEvent){
+  const reader = r.body.getReader(), dec = new TextDecoder(); let buf='';
+  while(true){
+    const {done,value} = await reader.read(); if(done) break;
+    buf += dec.decode(value,{stream:true});
+    let i;
+    while((i = buf.indexOf('\n')) >= 0){
+      const line = buf.slice(0,i).trim(); buf = buf.slice(i+1);
+      if(line.startsWith('data:')){
+        const d = line.slice(5).trim();
+        if(d && d!=='[DONE]'){ try{ onEvent(JSON.parse(d)); }catch(e){} }
+      }
+    }
+  }
+}
+async function fail(r){
+  let m = 'API error '+r.status;
+  try{ const d = await r.json(); m = d.error?.message || m; }catch(e){}
+  throw new Error(m);
+}
+async function askClaude(msgs, system, onDelta){
+  const r = await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'content-type':'application/json','x-api-key':cfg.k_claude,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    body: JSON.stringify({model:mdl('claude'),max_tokens:4096,stream:true,system,messages:msgs.map(m=>({role:m.role,content:m.text}))})
+  });
+  if(!r.ok) await fail(r);
+  let text='';
+  await sse(r, ev=>{ if(ev.type==='content_block_delta' && ev.delta?.text){ text += ev.delta.text; onDelta && onDelta(text); } });
+  return {text: text || '(empty reply)'};
+}
+async function askGemini(msgs, system, onDelta){
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(mdl('gemini'))}:streamGenerateContent?alt=sse&key=${encodeURIComponent(cfg.k_gemini)}`;
+  const r = await fetch(url,{
+    method:'POST',headers:{'content-type':'application/json'},
+    body: JSON.stringify({
+      systemInstruction:{parts:[{text:system}]},
+      contents: msgs.map(m=>({role:m.role==='assistant'?'model':'user',parts:[{text:m.text}]}))
+    })
+  });
+  if(!r.ok) await fail(r);
+  let text='';
+  await sse(r, ev=>{ for(const p of (ev.candidates?.[0]?.content?.parts||[])){ if(p.text){ text += p.text; onDelta && onDelta(text); } } });
+  return {text: text || '(empty reply)'};
+}
+async function askCompat(url,key,model,msgs,system,onDelta){
+  const body = {model,messages:[{role:'system',content:system},...msgs.map(m=>({role:m.role,content:m.text}))]};
+  const headers = {'content-type':'application/json','authorization':'Bearer '+key};
+  let r = await fetch(url,{method:'POST',headers,body:JSON.stringify({...body,stream:true})});
+  if(!r.ok){
+    let m=''; try{ m = (await r.clone().json()).error?.message || ''; }catch(e){}
+    if(/stream/i.test(m)){
+      r = await fetch(url,{method:'POST',headers,body:JSON.stringify(body)});
+      if(!r.ok) await fail(r);
+      const d = await r.json();
+      const text = d.choices?.[0]?.message?.content || '(empty reply)';
+      onDelta && onDelta(text);
+      return {text, sources:d.citations};
+    }
+    throw new Error(m || 'API error '+r.status);
+  }
+  let text='', sources;
+  await sse(r, ev=>{
+    const c = ev.choices?.[0]?.delta?.content;
+    if(c){ text += c; onDelta && onDelta(text); }
+    if(ev.citations) sources = ev.citations;
+  });
+  return {text: text || '(empty reply)', sources};
+}
+function askOpenAI(m,s,cb){ return askCompat('https://api.openai.com/v1/chat/completions',cfg.k_openai,mdl('openai'),m,s,cb); }
+function askPerplexity(m,s,cb){ return askCompat('https://api.perplexity.ai/chat/completions',cfg.k_perplexity,mdl('perplexity'),m,s,cb); }
+
+// ---------- The "one AI" brain ----------
+async function neonAnswer(question, cat, onDelta){
+  const keys = have();
+  if(!keys.length) throw new Error('Open ⚙️ Settings and add at least one API key so Neon AI has something to run on.');
+  const msgs = history.map(m=>({role:m.role,text:m.text}));
+  const system = sysFor(cat);
+
+  // Fusion: every AI answers, then one of them merges everything into a single answer
+  if(cfg.fusion && keys.length>1){
+    onDelta && onDelta('Combining the best answers…');
+    const results = await Promise.allSettled(keys.map(p=>PROVIDERS[p].ask(msgs, system).then(o=>({p,...o}))));
+    const good = results.filter(r=>r.status==='fulfilled').map(r=>r.value);
+    if(!good.length) throw new Error(results[0].reason?.message || 'All AIs failed.');
+    const sources = good.flatMap(g=>g.sources||[]);
+    if(good.length===1) return {text:good[0].text,sources,tag:'Fusion · '+PROVIDERS[good[0].p].name};
+    const drafts = good.map((g,i)=>`--- Draft ${i+1} ---\n${g.text}`).join('\n\n');
+    const synthPrompt = `The user asked:\n${question}\n\nSeveral expert drafts are below. Write ONE final answer that keeps the best, most accurate parts of each, fixes any mistakes or disagreements, and removes repetition. Do not mention drafts or other AIs; just answer as Neon AI.\n\n${drafts}`;
+    const order = ['claude','openai','gemini','perplexity'].filter(p=>keys.includes(p));
+    for(const p of order){
+      try{
+        const o = await PROVIDERS[p].ask([...msgs.slice(0,-1),{role:'user',text:synthPrompt}], system);
+        return {text:o.text,sources,tag:'Fusion · '+good.map(g=>PROVIDERS[g.p].name).join(' + ')};
+      }catch(e){}
+    }
+    return {text:good[0].text,sources,tag:'Fusion · '+PROVIDERS[good[0].p].name};
+  }
+
+  // Normal: route to the best AI for this question, fall back to the next if it fails
+  const order = PRIORITY[cat].filter(p=>keys.includes(p));
+  let lastErr;
+  for(const p of order){
+    try{
+      const o = await PROVIDERS[p].ask(msgs, system, onDelta);
+      return {text:o.text,sources:o.sources,tag:PROVIDERS[p].name};
+    }catch(e){ lastErr = e; onDelta && onDelta('…'); }
+  }
+  throw lastErr;
+}
+
+// ---------- UI ----------
+function render(el, text, sources){
+  el.textContent = '';
+  text.split(/```/).forEach((part,i)=>{
+    if(i%2===0){ el.appendChild(document.createTextNode(part)); }
+    else{
+      const lang = (part.match(/^([^\n]*)\n/)||['',''])[1].trim().toLowerCase();
+      const code = part.replace(/^[^\n]*\n/, '').replace(/\n$/,'');
+      const pre = document.createElement('pre');
+      const c = document.createElement('code'); c.textContent = code;
+      const bar = document.createElement('div'); bar.className='bar';
+      const mk = (label,fn,cls)=>{ const b=document.createElement('button'); b.className='copy'+(cls?' '+cls:''); b.type='button'; b.textContent=label; b.onclick=()=>fn(b); bar.appendChild(b); };
+      const isWeb = lang==='html' || lang==='svg' || /^\s*<!doctype html|^\s*<html/i.test(code);
+      if(isWeb) mk('▶ Run', ()=>{ $('#pframe').srcdoc = code; $('#preview').showModal(); }, 'run');
+      mk('Download', ()=>{
+        const ext = {html:'html',svg:'svg',javascript:'js',js:'js',python:'py',py:'py',css:'css',json:'json',java:'java',cpp:'cpp','c++':'cpp',c:'c',bash:'sh',sh:'sh',typescript:'ts',ts:'ts'}[lang] || 'txt';
+        const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([code],{type:'text/plain'}));
+        a.download = 'neon-code.'+ext; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+      });
+      mk('Copy', b=>{ navigator.clipboard?.writeText(code); b.textContent='Copied'; setTimeout(()=>b.textContent='Copy',1200); });
+      pre.append(bar,c); el.appendChild(pre);
+    }
+  });
+  if(sources && sources.length){
+    const s = document.createElement('div'); s.className='src'; s.append('Sources: ');
+    [...new Set(sources)].slice(0,6).forEach((u,i)=>{ const a=document.createElement('a'); a.href=u; a.target='_blank'; a.rel='noopener'; a.textContent='['+(i+1)+']'; s.append(a,' '); });
+    el.appendChild(s);
+  }
+}
+function addMsg(role, text, tag, sources, img){
+  const d = document.createElement('div'); d.className='msg '+(role==='user'?'me':'ai');
+  if(role!=='user' && tag){ const w=document.createElement('div'); w.className='who'; w.textContent='⚡ Neon AI'; d.appendChild(w); }
+  const body = document.createElement('div'); d.appendChild(body); render(body, text, sources);
+  if(img){
+    const im = document.createElement('img'); im.className='pic'; im.src = img; d.appendChild(im);
+    if(role!=='user'){
+      const bar = document.createElement('div'); bar.className='picbar';
+      const b = document.createElement('button'); b.className='copy'; b.type='button'; b.textContent='Download';
+      b.onclick = ()=>{ const a=document.createElement('a'); a.href=img; a.download='neon-image.'+(img.startsWith('data:image/jpeg')?'jpg':'png'); a.click(); };
+      bar.appendChild(b); d.appendChild(bar);
+    }
+  }
+  $('#chat').appendChild(d); $('#chat').scrollTop = 1e9;
+  return {d,body};
+}
+function redraw(){
+  $('#chat').innerHTML='';
+  if(!history.length){
+    $('#chat').innerHTML = mode==='image'
+      ? '<div class="hello"><b>IMAGE</b>Describe a picture to create, or tap 📎 to add a photo and tell me how to edit it. Try: "make the sky a sunset".</div>'
+      : mode==='codex'
+      ? '<div class="hello"><b>CODEX</b>Describe an app or paste code. I will build it, fix it, and you can tap ▶ Run to try it right here.</div>'
+      : '<div class="hello"><b>NEON AI</b>Neon AI combines the best AIs into one. Ask me anything.</div>';
+  }
+  history.forEach(x=>addMsg(x.role,x.text,x.tag,x.sources,x.img));
+  $('#fusion').classList.toggle('on', cfg.fusion);
+  $('#input').placeholder = mode==='image' ? 'Describe an image or how to edit your photo...' : mode==='codex' ? 'Describe an app or paste code...' : 'Ask Neon AI anything...';
+  $('#attach').style.display = mode==='image' ? 'block' : 'none';
+  updateChip();
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on', t.dataset.mode===mode));
+}
+
+// ---------- Image tab (Google Nano Banana via your Gemini key) ----------
+async function askImage(prompt, base){
+  if(!cfg.k_gemini) throw new Error('The Image tab uses your Gemini key. Add it in ⚙️ Settings.');
+  const parts = [{text:prompt}];
+  if(base) parts.push({inline_data:{mime_type:base.mime,data:base.data}});
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(cfg.m_image)}:generateContent?key=${encodeURIComponent(cfg.k_gemini)}`;
+  const r = await fetch(url,{method:'POST',headers:{'content-type':'application/json'},
+    body:JSON.stringify({contents:[{parts}],generationConfig:{responseModalities:['TEXT','IMAGE']}})});
+  const d = await r.json();
+  if(!r.ok) throw new Error(d.error?.message || 'Image error '+r.status);
+  let text='', img=null;
+  for(const p of (d.candidates?.[0]?.content?.parts||[])){
+    if(p.text) text += p.text;
+    const id = p.inlineData || p.inline_data;
+    if(id?.data) img = {mime:id.mimeType||id.mime_type||'image/png', data:id.data};
+  }
+  if(!img) throw new Error(text || 'No image came back. Try rewording, or check the image model name in ⚙️ Settings (try gemini-2.5-flash-image).');
+  return {text,img};
+}
+async function imageFlow(text){
+  const base = pendingImg || baseImg;
+  const thumb = pendingImg ? `data:${pendingImg.mime};base64,${pendingImg.data}` : null;
+  history.push({role:'user',text,img:thumb});
+  addMsg('user',text,null,null,thumb);
+  pendingImg = null; updateChip();
+  const {d,body} = addMsg('assistant','Creating…','Nano Banana');
+  try{
+    const out = await askImage(text, base);
+    baseImg = out.img;
+    const url = `data:${out.img.mime};base64,${out.img.data}`;
+    history.push({role:'assistant',text:out.text,tag:'Nano Banana',img:url});
+    d.remove(); addMsg('assistant',out.text,'Nano Banana',null,url);
+    updateChip();
+  }catch(err){
+    history.pop();
+    render(body,'⚠️ '+err.message);
+  }
+  $('#chat').scrollTop = 1e9;
+}
+function updateChip(){
+  const bar = $('#chipbar');
+  const cur = mode==='image' ? (pendingImg || baseImg) : null;
+  if(!cur){ bar.style.display='none'; return; }
+  bar.style.display='flex';
+  $('#chipimg').src = `data:${cur.mime};base64,${cur.data}`;
+  $('#chiptext').textContent = pendingImg ? 'New photo attached' : 'Editing your last image';
+}
+$('#attach').onclick = ()=>$('#file').click();
+$('#chipx').onclick = ()=>{ pendingImg=null; baseImg=null; updateChip(); };
+$('#file').onchange = e=>{
+  const f = e.target.files[0]; if(!f) return;
+  const fr = new FileReader();
+  fr.onload = ()=>{
+    const im = new Image();
+    im.onload = ()=>{
+      const max = 1536, k = Math.min(1, max/Math.max(im.width,im.height));
+      const c = document.createElement('canvas'); c.width = Math.round(im.width*k); c.height = Math.round(im.height*k);
+      c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+      pendingImg = {mime:'image/jpeg', data:c.toDataURL('image/jpeg',0.9).split(',')[1]};
+      updateChip();
+    };
+    im.src = fr.result;
+  };
+  fr.readAsDataURL(f); e.target.value='';
+};
+
+$('#form').onsubmit = async e=>{
+  e.preventDefault();
+  const text = $('#input').value.trim(); if(!text) return;
+  $('#input').value=''; $('#input').style.height='auto';
+  if(!history.length) $('#chat').innerHTML='';
+  if(mode==='image'){ await imageFlow(text); return; }
+  history.push({role:'user',text});
+  addMsg('user',text);
+  const cat = mode==='codex' ? 'codex' : detect(text);
+  const {d,body} = addMsg('assistant','…', 'Neon AI');
+  let live = true, raf = 0, latest = '';
+  const onDelta = t=>{ latest = t; if(!raf) raf = requestAnimationFrame(()=>{ raf = 0; if(live){ render(body,latest); $('#chat').scrollTop = 1e9; } }); };
+  try{
+    const out = await neonAnswer(text, cat, onDelta);
+    live = false;
+    history.push({role:'assistant',text:out.text,tag:out.tag,sources:out.sources});
+    render(body, out.text, out.sources);
+  }catch(err){
+    live = false;
+    history.pop();
+    render(body, '⚠️ '+err.message);
+  }
+  $('#chat').scrollTop = 1e9;
+};
+$('#input').addEventListener('input',function(){ this.style.height='auto'; this.style.height=Math.min(this.scrollHeight,140)+'px'; });
+$('#clear').onclick = ()=>{ hists[mode]=[]; history=hists[mode]; if(mode==='image'){pendingImg=null;baseImg=null;} redraw(); };
+$('#tabs').onclick = e=>{
+  const b = e.target.closest('.tab'); if(!b) return;
+  mode = b.dataset.mode; history = hists[mode]; redraw();
+};
+$('#pclose').onclick = ()=>{ $('#preview').close(); $('#pframe').srcdoc=''; };
+$('#fusion').onclick = ()=>{
+  if(!cfg.fusion && have().length<2){ alert('Fusion needs keys for at least 2 AIs. Add them in ⚙️ Settings.'); return; }
+  cfg.fusion = !cfg.fusion; store(); redraw();
+};
+
+// ---------- Settings dialog ----------
+const dlg = $('#settings');
+function buildSettings(){
+  $('#custom').value = cfg.custom;
+  $('#m_image').value = cfg.m_image;
+  $('#speed').value = cfg.speed;
+  $('#cards').innerHTML = '';
+  for(const p in PROVIDERS){
+    const P = PROVIDERS[p];
+    const c = document.createElement('div'); c.className='card';
+    c.innerHTML = `<b>${P.emoji} ${P.name}</b><div class="spec">${P.best}</div>
+      <label>API key</label><input id="k_${p}" type="password" autocomplete="off">
+      <label>Model name (optional, overrides the speed setting)</label><input id="m_${p}" type="text">
+      <a href="${P.link}" target="_blank" rel="noopener">Get a key →</a>`;
+    $('#cards').appendChild(c);
+    $('#k_'+p).value = cfg['k_'+p]; $('#m_'+p).value = cfg['m_'+p]; $('#m_'+p).placeholder = P.fast+' (fast) / '+P.model+' (smart)';
+  }
+}
+$('#gear').onclick = ()=>{ buildSettings(); dlg.showModal(); };
+$('#cancel').onclick = ()=>dlg.close();
+$('#save').onclick = ()=>{
+  cfg.custom = $('#custom').value.trim();
+  cfg.m_image = $('#m_image').value.trim() || DEF.m_image;
+  for(const p in PROVIDERS){ cfg['k_'+p] = $('#k_'+p).value.trim(); cfg['m_'+p] = $('#m_'+p).value.trim(); }
+  cfg.speed = $('#speed').value;
+  if(have().length<2) cfg.fusion = false;
+  store(); dlg.close(); redraw();
+};
+
+function startup(){ if(!have().length){ buildSettings(); dlg.showModal(); } }
+redraw();
+if(isUnlocked()){ $('#lock').style.display='none'; startup(); } else { showLock(); }
+</script>
+</body>
+</html>
