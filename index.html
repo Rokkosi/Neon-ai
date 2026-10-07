@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#07080d">
+<link rel="manifest" href="manifest.webmanifest">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -78,6 +79,12 @@
   #lock button{background:linear-gradient(135deg,var(--c1),var(--c2));color:#06070c;border:0;border-radius:12px;padding:12px;font-weight:800;font-size:16px;cursor:pointer}
   #lock button:disabled{opacity:.5}
   #lockmsg{min-height:20px;font-size:13px;color:var(--c2)}
+  #chatbar{display:flex;gap:8px;padding:6px 12px;background:var(--bg);border-bottom:1px solid var(--line)}
+  #chatbar .icon{font-size:13px;padding:6px 10px}
+  #chatsbtn{flex:1;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .crow{display:flex;gap:6px;margin-top:8px;align-items:center}
+  .crow .ctitle{flex:1;min-width:0;text-align:left;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:10px;font:inherit;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
+  .crow.on .ctitle{border-color:var(--c1);box-shadow:0 0 8px #00f0ff44}
 </style>
 </head>
 <body>
@@ -102,6 +109,10 @@
   <button class="tab" data-mode="codex">💻 Codex</button>
   <button class="tab" data-mode="image">🎨 Image</button>
 </div>
+<div id="chatbar">
+  <button class="icon" id="chatsbtn" type="button">☰ <span id="ctitle">New chat</span></button>
+  <button class="icon" id="newbtn" type="button">＋ New chat</button>
+</div>
 <div id="chat"></div>
 <div id="chipbar"><img id="chipimg" alt=""><span id="chiptext"></span><button class="icon" id="chipx" type="button">✕</button></div>
 <input type="file" id="file" accept="image/*" style="display:none">
@@ -110,6 +121,12 @@
   <textarea id="input" rows="1" placeholder="Ask Neon AI anything..."></textarea>
   <button class="send">Send</button>
 </form>
+
+<dialog id="chatlist">
+  <h3 id="cltitle" style="margin:0 0 4px;color:var(--c1)">Chats</h3>
+  <div id="clist"></div>
+  <div class="row"><button id="clclose" type="button">Close</button><button class="pri" id="clnew" type="button">＋ New chat</button></div>
+</dialog>
 
 <dialog id="preview">
   <div class="top"><b style="color:var(--c1)">▶ App preview</b><button class="icon" id="pclose" type="button">✕ Close</button></div>
@@ -141,6 +158,7 @@
 
 <script>
 const $ = s => document.querySelector(s);
+try{ if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js'); }catch(e){}
 
 // ---------- Lock screen (code is stored only as a scrambled hash) ----------
 const LOCK_SALT = 'neonai:v1:', LOCK_ROUNDS = 20000, LOCK_HASH = 'f5b36bcc2e9a8cee5557e86a55f57a8cdc1d1136c3fa5087631963b4988ebf72';
@@ -227,11 +245,43 @@ function load(){
 const mdl = p => cfg['m_'+p] || (cfg.speed==='smart' ? PROVIDERS[p].model : PROVIDERS[p].fast);
 function store(){ try{ localStorage.setItem('neonai', JSON.stringify(cfg)); }catch(e){} }
 let cfg = load();
-const hists = {chat:[], codex:[], image:[]};   // each tab keeps its own memory
 let pendingImg = null;   // photo the user just attached
 let baseImg = null;      // last image, used for follow-up edits
 let mode = 'chat';
-let history = hists.chat;
+const MODE_LABEL = {chat:'Chat', codex:'Codex', image:'Image'};
+let chatStore = null;
+try{ chatStore = JSON.parse(localStorage.getItem('neonai_chats')||'null'); }catch(e){ chatStore = null; }
+if(!chatStore || !chatStore.chats) chatStore = {chats:{}, active:{}};
+if(!chatStore.active) chatStore.active = {};
+for(const m of ['chat','codex','image']){ if(!chatStore.chats[m]) chatStore.chats[m] = []; }
+function saveChats(){
+  try{ localStorage.setItem('neonai_chats', JSON.stringify(chatStore)); }
+  catch(e){
+    try{ localStorage.setItem('neonai_chats', JSON.stringify(chatStore,(k,v)=>(k==='img'&&typeof v==='string'&&v.length>2000)?undefined:v)); }catch(e2){}
+  }
+}
+function newChatObj(){ return {id:Date.now().toString(36)+Math.random().toString(36).slice(2,5), title:'New chat', t:Date.now(), msgs:[]}; }
+function curChat(){
+  const list = chatStore.chats[mode];
+  let c = list.find(x=>x.id===chatStore.active[mode]);
+  if(!c){ c = list[0]; if(!c){ c = newChatObj(); list.unshift(c); } chatStore.active[mode] = c.id; }
+  return c;
+}
+let history = curChat().msgs;
+function setHistory(){
+  history = curChat().msgs; pendingImg = null; baseImg = null;
+  if(mode==='image'){
+    for(let i=history.length-1;i>=0;i--){
+      const m = history[i];
+      if(m.role==='assistant' && m.img){ const mm = m.img.match(/^data:([^;]+);base64,(.*)$/); if(mm) baseImg = {mime:mm[1],data:mm[2]}; break; }
+    }
+  }
+}
+function persist(){
+  const c = curChat();
+  if(c.title==='New chat'){ const f = history.find(m=>m.role==='user'); if(f) c.title = f.text.slice(0,40); }
+  c.t = Date.now(); saveChats();
+}
 
 const have = () => Object.keys(PROVIDERS).filter(p=>cfg['k_'+p]);
 function sysFor(cat){ return BASE_SYS+" "+CAT_SYS[cat]+(cfg.custom?"\n\nUser's custom instructions:\n"+cfg.custom:''); }
@@ -413,6 +463,7 @@ function redraw(){
   $('#attach').style.display = mode==='image' ? 'block' : 'none';
   updateChip();
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on', t.dataset.mode===mode));
+  $('#ctitle').textContent = curChat().title;
 }
 
 // ---------- Image tab (Google Nano Banana via your Gemini key) ----------
@@ -437,7 +488,7 @@ async function askImage(prompt, base){
 async function imageFlow(text){
   const base = pendingImg || baseImg;
   const thumb = pendingImg ? `data:${pendingImg.mime};base64,${pendingImg.data}` : null;
-  history.push({role:'user',text,img:thumb});
+  history.push({role:'user',text,img:thumb}); persist();
   addMsg('user',text,null,null,thumb);
   pendingImg = null; updateChip();
   const {d,body} = addMsg('assistant','Creating…','Nano Banana');
@@ -445,11 +496,11 @@ async function imageFlow(text){
     const out = await askImage(text, base);
     baseImg = out.img;
     const url = `data:${out.img.mime};base64,${out.img.data}`;
-    history.push({role:'assistant',text:out.text,tag:'Nano Banana',img:url});
+    history.push({role:'assistant',text:out.text,tag:'Nano Banana',img:url}); persist();
     d.remove(); addMsg('assistant',out.text,'Nano Banana',null,url);
     updateChip();
   }catch(err){
-    history.pop();
+    history.pop(); persist();
     render(body,'⚠️ '+err.message);
   }
   $('#chat').scrollTop = 1e9;
@@ -489,6 +540,7 @@ $('#form').onsubmit = async e=>{
   if(mode==='image'){ await imageFlow(text); return; }
   history.push({role:'user',text});
   addMsg('user',text);
+  persist();
   const cat = mode==='codex' ? 'codex' : detect(text);
   const {d,body} = addMsg('assistant','…', 'Neon AI');
   let live = true, raf = 0, latest = '';
@@ -497,25 +549,56 @@ $('#form').onsubmit = async e=>{
     const out = await neonAnswer(text, cat, onDelta);
     live = false;
     history.push({role:'assistant',text:out.text,tag:out.tag,sources:out.sources});
+    persist();
     render(body, out.text, out.sources);
   }catch(err){
     live = false;
-    history.pop();
+    history.pop(); persist();
     render(body, '⚠️ '+err.message);
   }
   $('#chat').scrollTop = 1e9;
 };
 $('#input').addEventListener('input',function(){ this.style.height='auto'; this.style.height=Math.min(this.scrollHeight,140)+'px'; });
-$('#clear').onclick = ()=>{ hists[mode]=[]; history=hists[mode]; if(mode==='image'){pendingImg=null;baseImg=null;} redraw(); };
+$('#clear').onclick = ()=>{ if(!history.length || confirm('Delete this chat?')){ delChat(curChat().id); redraw(); } };
 $('#tabs').onclick = e=>{
   const b = e.target.closest('.tab'); if(!b) return;
-  mode = b.dataset.mode; history = hists[mode]; redraw();
+  mode = b.dataset.mode; setHistory(); redraw();
 };
 $('#pclose').onclick = ()=>{ $('#preview').close(); $('#pframe').srcdoc=''; };
 $('#fusion').onclick = ()=>{
   if(!cfg.fusion && have().length<2){ alert('Fusion needs keys for at least 2 AIs. Add them in ⚙️ Settings.'); return; }
   cfg.fusion = !cfg.fusion; store(); redraw();
 };
+
+// ---------- Chat list ----------
+function delChat(id){
+  const list = chatStore.chats[mode], i = list.findIndex(c=>c.id===id);
+  if(i>=0) list.splice(i,1);
+  if(chatStore.active[mode]===id) chatStore.active[mode] = null;
+  setHistory(); saveChats();
+}
+function newChat(){
+  if(curChat().msgs.length){ const c = newChatObj(); chatStore.chats[mode].unshift(c); chatStore.active[mode] = c.id; setHistory(); saveChats(); }
+  redraw();
+}
+function openList(){
+  const box = $('#clist'); box.innerHTML = '';
+  $('#cltitle').textContent = MODE_LABEL[mode]+' chats';
+  const act = curChat().id;
+  chatStore.chats[mode].filter(c=>c.msgs.length || c.id===act).sort((a,b)=>b.t-a.t).forEach(c=>{
+    const row = document.createElement('div'); row.className = 'crow'+(c.id===act?' on':'');
+    const b = document.createElement('button'); b.className='ctitle'; b.type='button'; b.textContent = c.title;
+    b.onclick = ()=>{ chatStore.active[mode] = c.id; setHistory(); saveChats(); $('#chatlist').close(); redraw(); };
+    const x = document.createElement('button'); x.className='icon'; x.type='button'; x.textContent='🗑';
+    x.onclick = ()=>{ if(!confirm('Delete this chat?')) return; delChat(c.id); openList(); redraw(); };
+    row.append(b,x); box.appendChild(row);
+  });
+  if(!$('#chatlist').open) $('#chatlist').showModal();
+}
+$('#chatsbtn').onclick = openList;
+$('#newbtn').onclick = newChat;
+$('#clnew').onclick = ()=>{ newChat(); $('#chatlist').close(); };
+$('#clclose').onclick = ()=>$('#chatlist').close();
 
 // ---------- Settings dialog ----------
 const dlg = $('#settings');
